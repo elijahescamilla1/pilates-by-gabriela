@@ -61,7 +61,7 @@ Check off `- [ ]` boxes as you complete them.
   (e.g. one-time first session, assessment + goals). Draft two options if I
   don't provide wording.
 
-- [ ] **7. Add Open Graph / Twitter tags.** No `og:`/`twitter:` tags exist.
+- [x] **7. Add Open Graph / Twitter tags.** No `og:`/`twitter:` tags exist.
   Add `og:title`, `og:description`, `og:image` (absolute URL, ~1200x630),
   `og:url`, `og:type=website`, and `twitter:card=summary_large_image`. Base
   text on the existing title/meta description. (Favicon already present.)

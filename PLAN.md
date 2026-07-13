@@ -78,6 +78,8 @@ Check off `- [ ]` boxes as you complete them.
 
 - [x] **10. Optional trust block.** Studio hours, a one-line cancellation
   note, or a short FAQ near the location/booking area, matching existing type.
+  (FAQ trio + real Hours and Cancellations items added with client-provided
+  wording.)
 
 ## Final QA — before delivery
 

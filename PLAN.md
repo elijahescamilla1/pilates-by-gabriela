@@ -83,4 +83,7 @@ Check off `- [ ]` boxes as you complete them.
 - [x] **11. Full pass.** Click every nav anchor, CTA, and social icon and
   confirm destinations. Confirm hero shows on hard refresh, layout holds at
   390px, and there are no console errors.
-- [ ] **12. Live check.** Test the deployed URL in incognito and on a phone.
+- [x] **12. Live check.** Test the deployed URL in incognito and on a phone.
+  (Verified live: fresh-load hero, 390px layout, 9/9 posters, deep links,
+  OG image 200, all 3 Square category URLs 200, zero console errors.
+  Real-phone spot check: Elijah.)

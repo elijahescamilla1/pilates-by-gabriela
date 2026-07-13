@@ -475,7 +475,7 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#B08A2E" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2" fill="#C9A94B" stroke="none"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
         Your card is encrypted and processed by Square. This site never sees it.
       </div>
-      <a class="cta cta--grad modal-pay" href="https://pilates-by-gabriela.square.site" target="_blank" rel="noopener"><span class="dot"></span>Pay $<span id="coPayAmt"></span></a>
+      <a class="cta cta--grad modal-pay" id="coPay" href="https://pilates-by-gabriela.square.site" target="_blank" rel="noopener"><span class="dot"></span>Pay $<span id="coPayAmt"></span></a>
     </div>
   </div>
 </div>
@@ -778,10 +778,14 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
   }
 
   /* ---------- checkout modal ---------- */
+  // Fallback destination when a package has no specific Square product URL.
+  var SQUARE_ROOT = 'https://pilates-by-gabriela.square.site';
+  // To deep-link a package straight to its Square product, set its `url`.
+  // Leave null to fall back to SQUARE_ROOT.
   var PACKAGES = {
-    intro:   { eyebrow: 'Start here',     title: 'New Client Intro', price: '90',  desc: '55 minutes · one-on-one on the reformer.' },
-    private: { eyebrow: 'Most popular',   title: 'Private Sessions', price: '90',  desc: '55 minutes · one-on-one on the reformer.' },
-    duet:    { eyebrow: 'With a partner', title: 'Duet Sessions',    price: '120', desc: '55 minutes · share the reformer with a friend.' }
+    intro:   { eyebrow: 'Start here',     title: 'New Client Intro', price: '90',  desc: '55 minutes · one-on-one on the reformer.',        url: null },
+    private: { eyebrow: 'Most popular',   title: 'Private Sessions', price: '90',  desc: '55 minutes · one-on-one on the reformer.',        url: null },
+    duet:    { eyebrow: 'With a partner', title: 'Duet Sessions',    price: '120', desc: '55 minutes · share the reformer with a friend.',  url: null }
   };
   var overlay = document.getElementById('modalOverlay');
   var card = document.getElementById('modalCard');
@@ -796,6 +800,7 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
     document.getElementById('coTotal').textContent = p.price;
     document.getElementById('coPayAmt').textContent = p.price;
     document.getElementById('coDesc').textContent = p.desc;
+    document.getElementById('coPay').href = p.url || SQUARE_ROOT;
     overlay.classList.add('open');
   }
   function closeCheckout() { overlay.classList.remove('open'); }

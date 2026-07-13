@@ -36,7 +36,7 @@ Check off `- [ ]` boxes as you complete them.
   hard refresh shows the full hero with zero scrolling; leave lower-page
   reveals looking the same.
 
-- [ ] **2. Hero video poster + overlay.** Videos show a blank gradient while
+- [x] **2. Hero video poster + overlay.** Videos show a blank gradient while
   loading and a heavy tint hides the movement. Add `poster` stills to each
   hero `<video>`; ensure `autoplay muted loop playsinline preload="metadata"`;
   lighten the overlay opacity so footage is visible but text stays legible.

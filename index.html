@@ -72,7 +72,7 @@ button{font-family:inherit}
 .slide-media{position:absolute;inset:0;background:linear-gradient(170deg,#FFB791,#BC4B38);border-radius:inherit;overflow:hidden}
 .slide-media video,.slide-media img{width:100%;height:100%;object-fit:cover;display:block}
 .mute-badge{position:absolute;top:104px;right:16px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:rgba(64,20,20,.45);border:1px solid rgba(255,246,238,.35);pointer-events:none;animation:speakerBounce 2.2s ease-in-out infinite}
-.slide-bar{position:absolute;left:0;right:0;bottom:0;padding:48px 14px 14px;background:linear-gradient(transparent,rgba(64,20,20,.8) 60%);pointer-events:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.slide-bar{position:absolute;left:0;right:0;bottom:0;padding:48px 14px 14px;background:linear-gradient(transparent,rgba(64,20,20,.55) 60%);pointer-events:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .slide-bar-group{display:flex;align-items:center;gap:10px;min-width:0}
 .slide-nav{pointer-events:auto;flex-shrink:0;width:36px;height:36px;border-radius:50%;font-size:15px;cursor:pointer;transition:background .2s}
 .slide-nav--prev{border:1.5px solid rgba(255,201,166,.6);background:rgba(64,20,20,.4);color:#FFC9A6}
@@ -95,7 +95,7 @@ button{font-family:inherit}
 .beach-stage{position:relative;height:540px;perspective:1300px}
 .beach-slide{position:absolute;left:50%;top:50%;width:300px;height:534px;margin:-267px 0 0 -150px;border-radius:var(--frame-rad);overflow:hidden;background:#5C1F1F;border:7px solid #FFF6EE;box-shadow:0 26px 55px rgba(92,31,31,.3);transition:transform .7s cubic-bezier(.22,.9,.3,1),opacity .7s,filter .7s,border-radius .6s;pointer-events:none}
 .beach-slide video{width:100%;height:100%;object-fit:cover;display:block}
-.beach-bar{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 14px;background:linear-gradient(transparent,rgba(64,20,20,.75));display:flex;justify-content:center}
+.beach-bar{position:absolute;left:0;right:0;bottom:0;padding:44px 18px 14px;background:linear-gradient(transparent,rgba(64,20,20,.5));display:flex;justify-content:center}
 .beach-bar .slide-tiktok{pointer-events:auto}
 
 /* ---------- about ---------- */
@@ -526,8 +526,10 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
     if (s.kind === 'video') {
       mediaEl = document.createElement('video');
       mediaEl.src = s.src;
+      mediaEl.poster = s.src.replace('media/', 'media/posters/').replace(/\.mp4$/, '.jpg');
       mediaEl.loop = true;
       mediaEl.muted = true;
+      mediaEl.autoplay = true;
       mediaEl.playsInline = true;
       mediaEl.setAttribute('playsinline', '');
       mediaEl.preload = 'metadata';
@@ -658,8 +660,10 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
     el.className = 'beach-slide';
     var v = document.createElement('video');
     v.src = src;
+    v.poster = src.replace('media/', 'media/posters/').replace(/\.mp4$/, '.jpg');
     v.loop = true;
     v.muted = true;
+    v.autoplay = true;
     v.playsInline = true;
     v.setAttribute('playsinline', '');
     v.preload = 'metadata';

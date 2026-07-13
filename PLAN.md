@@ -68,7 +68,7 @@ Check off `- [ ]` boxes as you complete them.
 
 ## Tier 3 — polish
 
-- [ ] **8. Pricing card layout.** Rebalance vertical spacing so content sits
+- [x] **8. Pricing card layout.** Rebalance vertical spacing so content sits
   more centered inside the arch cards; keep equal heights and the "Most
   popular" treatment.
 

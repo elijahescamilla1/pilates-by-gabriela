@@ -274,7 +274,7 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
     <a href="#sessions">Sessions</a>
     <a href="#location">Location</a>
   </div>
-  <a class="cta cta--grad" href="https://pilates-by-gabriela.square.site" target="_blank" rel="noopener"><span class="dot"></span>Book a session</a>
+  <a class="cta cta--grad" href="book.html"><span class="dot"></span>Book a session</a>
 </nav>
 
 <!-- ================= HERO ================= -->
@@ -286,7 +286,7 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
       <h1 class="hero-title" style="margin:0;font-weight:400">See how<br>Gabriela teaches.</h1>
       <p class="hero-sub">Comprehensively certified BASI Pilates instruction for athletes, dancers, active adults, and anyone recovering from injury. Watch her in action, straight from her TikTok.</p>
       <div style="display:flex;gap:14px;align-items:center">
-        <div class="bubble"><a class="cta cta--dark" href="https://pilates-by-gabriela.square.site" target="_blank" rel="noopener"><span class="dot"></span>Book your first session</a></div>
+        <div class="bubble"><a class="cta cta--dark" href="book.html#packages"><span class="dot"></span>Book your first session</a></div>
       </div>
       <div class="hero-stats">
         <div><div class="hero-stat-num">BASI</div><div class="hero-stat-label">comprehensively certified</div></div>
@@ -309,7 +309,7 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
       <p>Keeping classical Pilates alive, one mat class at a time. Outdoor group sessions bring the practice back to its roots: breath, control, and the ground beneath you.</p>
       <p>Follow along on TikTok for upcoming mat classes, or book a private to build your foundation first.</p>
       <div style="display:flex;gap:14px;align-items:center;margin-top:32px">
-        <div class="bubble"><a class="cta cta--grad cta--big" href="https://pilates-by-gabriela.square.site" target="_blank" rel="noopener"><span class="dot"></span>Join a mat class</a></div>
+        <div class="bubble"><a class="cta cta--grad cta--big" href="book.html#mat"><span class="dot"></span>Join a mat class</a></div>
         <a class="tiktok-round tiktok-outline" href="https://www.tiktok.com/@gswizzle99" target="_blank" rel="noopener" aria-label="Watch on TikTok">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.4 2.2 1.8 3.7 4 3.9v3c-1.6 0-3-.5-4-1.3v6.6c0 3.6-2.6 6-6 6-3.2 0-5.8-2.4-5.8-5.7 0-3.4 2.9-5.9 6.4-5.6v3.1c-1.7-.3-3.2.8-3.2 2.5 0 1.5 1.2 2.6 2.7 2.6 1.7 0 2.9-1.2 2.9-3.2V3h3z"/></svg>
         </a>
@@ -516,6 +516,17 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
 <script>
 (function(){
   'use strict';
+  /* ---------- hash landing ---------- */
+  // Some browsers skip the anchor jump on load; land it explicitly so
+  // index.html#sessions etc. arrive at the right section from book.html.
+  var hashTarget = location.hash && document.getElementById(location.hash.slice(1));
+  if (hashTarget) {
+    var de = document.documentElement, prevSB = de.style.scrollBehavior;
+    de.style.scrollBehavior = 'auto';
+    de.scrollTop = hashTarget.getBoundingClientRect().top + window.scrollY;
+    de.style.scrollBehavior = prevSB;
+  }
+
   var TIKTOK = 'https://www.tiktok.com/@gswizzle99';
 
   var SLIDES = [

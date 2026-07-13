@@ -169,6 +169,22 @@ button{font-family:inherit}
 .location-contact a:hover{color:#FFB791}
 .map-frame{height:420px;border-radius:22px;overflow:hidden;border:6px solid rgba(255,246,238,.15);box-shadow:0 26px 55px rgba(0,0,0,.4);background:#FFE9DA}
 .map-frame iframe{width:100%;height:100%;border:none;display:block}
+.cform-wrap{max-width:680px;margin:84px auto 0}
+.cform-title{font-family:var(--font-head);font-size:34px;color:#FFF6EE;margin:0 0 10px;font-weight:400}
+.cform-sub{font-size:15px;line-height:1.7;color:#FFF3EA;margin:0 0 30px}
+.cform-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cform-field{display:flex;flex-direction:column;gap:8px}
+.cform-field--full{grid-column:1/-1}
+.cform-field label{font-size:13px;font-weight:700;letter-spacing:.06em;color:#FFF6EE}
+.cform-field label span{font-weight:500;color:#E9CDBF}
+.cform-field input,.cform-field textarea{width:100%;padding:14px 18px;border-radius:16px;border:1.5px solid rgba(255,246,238,.35);background:rgba(255,246,238,.08);color:#FFF6EE;font-family:inherit;font-size:15px;transition:border-color .25s,background .25s}
+.cform-field textarea{resize:vertical;min-height:120px;border-radius:20px}
+.cform-field input:focus,.cform-field textarea:focus{outline:2px solid #FFB791;outline-offset:2px;border-color:#FFB791;background:rgba(255,246,238,.14)}
+.cform-send{margin-top:26px}
+.cform-send:disabled{opacity:.6;cursor:default}
+.cform-honey{position:absolute;left:-9999px;width:0;height:0;opacity:0}
+.cform-status{font-size:15px;line-height:1.6;color:#FFE9DA;margin:18px 0 0;min-height:1.4em}
+.cform-status a{color:#FFB791;text-decoration:underline}
 .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;max-width:1220px;margin:76px auto 0;padding-top:46px;border-top:1px solid rgba(255,246,238,.18)}
 .trust-q{font-family:var(--font-head);font-size:20px;color:#FFF6EE;margin:0 0 10px}
 .trust p{font-size:15px;line-height:1.7;color:#E9CDBF;margin:0}
@@ -258,6 +274,8 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
   .movement-title,.about-title,.testimonials-title,.location-title{font-size:34px}
   .quote p{font-size:18px}
   .map-frame{height:320px}
+  .cform-grid{grid-template-columns:1fr}
+  .cform-title{font-size:28px}
   .modal-overlay{padding:16px}
   .modal-card{grid-template-columns:1fr;max-height:92vh;overflow:auto}
   .modal-left{padding:32px 28px 28px}
@@ -432,6 +450,33 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
     <div class="map-frame" data-reveal="tilt">
       <iframe src="https://www.google.com/maps?q=12230+1/2+Venice+Blvd,+Los+Angeles,+CA+90066&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Powerhouse Pilates Studios map"></iframe>
     </div>
+  </div>
+  <div id="contact" class="cform-wrap" data-reveal="up">
+    <h3 class="cform-title">Send a message.</h3>
+    <p class="cform-sub">Questions about sessions, packages, or availability? Write to Gabby directly and she will get back to you.</p>
+    <form id="contactForm">
+      <input type="text" name="_honey" class="cform-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="cform-grid">
+        <div class="cform-field">
+          <label for="cfName">Name</label>
+          <input id="cfName" name="name" type="text" required autocomplete="name">
+        </div>
+        <div class="cform-field">
+          <label for="cfEmail">Email</label>
+          <input id="cfEmail" name="email" type="email" required autocomplete="email">
+        </div>
+        <div class="cform-field cform-field--full">
+          <label for="cfPhone">Phone <span>(optional)</span></label>
+          <input id="cfPhone" name="phone" type="tel" autocomplete="tel">
+        </div>
+        <div class="cform-field cform-field--full">
+          <label for="cfMsg">Message</label>
+          <textarea id="cfMsg" name="message" rows="5" required></textarea>
+        </div>
+      </div>
+      <button type="submit" class="cta cta--grad cform-send">Send message</button>
+      <p class="cform-status" id="cfStatus" role="status" aria-live="polite"></p>
+    </form>
   </div>
   <div class="trust" data-reveal="up">
     <div class="trust-item">
@@ -873,6 +918,56 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
   card.addEventListener('click', function(e){ e.stopPropagation(); });
   document.getElementById('modalClose').addEventListener('click', closeCheckout);
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeCheckout(); });
+
+  /* ---------- contact form ---------- */
+  var cform = document.getElementById('contactForm');
+  var cfStatus = document.getElementById('cfStatus');
+  var cfBtn = cform.querySelector('.cform-send');
+
+  function cfFail() {
+    cfStatus.innerHTML = 'Something went wrong. Email Gabby directly at <a href="mailto:gabbypilatesmgmt@gmail.com">gabbypilatesmgmt@gmail.com</a>.';
+  }
+  function cfDone() {
+    cfBtn.disabled = false;
+    cfBtn.textContent = 'Send message';
+  }
+
+  cform.addEventListener('submit', function(e){
+    e.preventDefault();
+    var payload = {
+      name: document.getElementById('cfName').value.trim(),
+      email: document.getElementById('cfEmail').value.trim(),
+      phone: document.getElementById('cfPhone').value.trim(),
+      message: document.getElementById('cfMsg').value.trim(),
+      _subject: 'New inquiry from pilatesbygabby.com',
+      _template: 'table',
+      _honey: cform.querySelector('[name="_honey"]').value
+    };
+    cfBtn.disabled = true;
+    cfBtn.textContent = 'Sending...';
+    fetch('https://formsubmit.co/ajax/gabbypilatesmgmt@gmail.com', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      return res.json().then(function(data){ return { ok: res.ok, data: data }; });
+    }).then(function(r){
+      var msg = String((r.data && r.data.message) || '');
+      if (r.ok && String(r.data.success) === 'true') {
+        cfStatus.textContent = 'Thanks, Gabby will be in touch soon.';
+        cform.reset();
+      } else if (/activat/i.test(msg)) {
+        cfStatus.textContent = 'Thanks! Your message is on its way.';
+        cform.reset();
+      } else {
+        cfFail();
+      }
+      cfDone();
+    }).catch(function(){
+      cfFail();
+      cfDone();
+    });
+  });
 
   /* ---------- init ---------- */
   update();

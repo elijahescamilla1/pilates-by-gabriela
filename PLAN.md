@@ -75,7 +75,7 @@ Check off `- [ ]` boxes as you complete them.
 - [ ] **9. Third testimonial.** Add a third quote with matching markup so the
   row balances; note the source (Google/Square) if applicable.
 
-- [ ] **10. Optional trust block.** Studio hours, a one-line cancellation
+- [x] **10. Optional trust block.** Studio hours, a one-line cancellation
   note, or a short FAQ near the location/booking area, matching existing type.
 
 ## Final QA — before delivery

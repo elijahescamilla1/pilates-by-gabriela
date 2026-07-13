@@ -56,7 +56,7 @@ Check off `- [ ]` boxes as you complete them.
   (intro/private/duet) to its specific Square product URL via a small JS
   lookup; fall back to the Square root if missing. (Needs the 3 URLs.)
 
-- [ ] **6. Clarify Intro vs Private pricing.** Both show $90. Update the
+- [x] **6. Clarify Intro vs Private pricing.** Both show $90. Update the
   New Client Intro copy to make clear what it includes vs a standard private
   (e.g. one-time first session, assessment + goals). Draft two options if I
   don't provide wording.

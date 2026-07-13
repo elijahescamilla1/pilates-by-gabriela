@@ -47,7 +47,7 @@ Check off `- [ ]` boxes as you complete them.
 
 ## Tier 2 — should fix
 
-- [ ] **4. Text contrast (WCAG AA).** Darken the light-tan eyebrow labels
+- [x] **4. Text contrast (WCAG AA).** Darken the light-tan eyebrow labels
   ("VENICE BLVD · LOS ANGELES", "BEYOND THE STUDIO") and low-contrast body
   copy until body text hits 4.5:1 and large text 3:1. List each color changed
   with old/new hex and the ratio.

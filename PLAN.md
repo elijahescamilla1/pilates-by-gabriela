@@ -42,7 +42,7 @@ Check off `- [ ]` boxes as you complete them.
   lighten the overlay opacity so footage is visible but text stays legible.
   Show me which CSS rule controls the overlay before changing it.
 
-- [ ] **3. Mobile check.** Confirm hero, video carousel swipe, pricing cards,
+- [x] **3. Mobile check.** Confirm hero, video carousel swipe, pricing cards,
   and nav collapse hold up at 390px wide and on a real phone.
 
 ## Tier 2 — should fix

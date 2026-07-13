@@ -80,7 +80,7 @@ Check off `- [ ]` boxes as you complete them.
 
 ## Final QA — before delivery
 
-- [ ] **11. Full pass.** Click every nav anchor, CTA, and social icon and
+- [x] **11. Full pass.** Click every nav anchor, CTA, and social icon and
   confirm destinations. Confirm hero shows on hard refresh, layout holds at
   390px, and there are no console errors.
 - [ ] **12. Live check.** Test the deployed URL in incognito and on a phone.

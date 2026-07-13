@@ -72,7 +72,8 @@ Check off `- [ ]` boxes as you complete them.
   more centered inside the arch cards; keep equal heights and the "Most
   popular" treatment.
 
-- [x] **9. Third testimonial.** (Kept two per request; re-balanced to a centered pair.) Add a third quote with matching markup so the
+- [x] **9. Third testimonial.** (Added Elijah, Los Angeles as the third quote;
+  grid back to three columns.) Add a third quote with matching markup so the
   row balances; note the source (Google/Square) if applicable.
 
 - [x] **10. Optional trust block.** Studio hours, a one-line cancellation

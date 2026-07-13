@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pilates by Gabriela — BASI-Certified Pilates in Los Angeles</title>
 <meta name="description" content="Comprehensively certified BASI Pilates instruction for athletes, dancers, active adults, and anyone recovering from injury. Private and duet sessions on Venice Blvd, Los Angeles.">
@@ -195,7 +196,20 @@ button{font-family:inherit}
 .modal-pay:hover{transform:scale(1.03);box-shadow:0 18px 38px rgba(194,84,47,.55)}
 
 /* ---------- reveal ---------- */
+/* Hidden "from" state only applies under html.js (set by the first script in
+   <head>) so content stays visible if JS is slow, blocked, or fails. */
 [data-reveal]{will-change:opacity,transform}
+html.js [data-reveal]{opacity:0;transform:translateY(48px);transition:opacity .9s cubic-bezier(.22,.9,.3,1),transform .9s cubic-bezier(.22,.9,.3,1)}
+html.js [data-reveal="left"]{transform:translateX(-56px)}
+html.js [data-reveal="right"]{transform:translateX(56px)}
+html.js [data-reveal="tilt"]{transform:perspective(1200px) rotateY(-14deg) rotateX(4deg) translateY(30px)}
+html.js [data-reveal="card1"]{transform:perspective(1000px) rotateX(18deg) translateY(56px)}
+html.js [data-reveal="card2"]{transform:perspective(1000px) rotateX(18deg) translateY(76px)}
+html.js [data-reveal="card3"]{transform:perspective(1000px) rotateX(18deg) translateY(96px)}
+html.js [data-reveal].is-revealed{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html.js [data-reveal]{opacity:1;transform:none;transition:none}
+}
 
 /* ---------- responsive ---------- */
 @media (max-width:1100px){
@@ -691,50 +705,55 @@ button{font-family:inherit}
     });
   }, 200);
 
-  /* ---------- scroll reveals ---------- */
-  var initial = {
-    up: 'translateY(48px)',
-    left: 'translateX(-56px)',
-    right: 'translateX(56px)',
-    tilt: 'perspective(1200px) rotateY(-14deg) rotateX(4deg) translateY(30px)',
-    card1: 'perspective(1000px) rotateX(18deg) translateY(56px)',
-    card2: 'perspective(1000px) rotateX(18deg) translateY(76px)',
-    card3: 'perspective(1000px) rotateX(18deg) translateY(96px)'
-  };
+  /* ---------- scroll reveals (progressive enhancement; hidden state lives in CSS under html.js) ---------- */
   var revealEls = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
-  revealEls.forEach(function(el){
-    var kind = el.getAttribute('data-reveal');
-    el.style.opacity = '0';
-    el.style.transform = initial[kind] || initial.up;
-    el.style.transition = 'opacity .9s cubic-bezier(.22,.9,.3,1), transform .9s cubic-bezier(.22,.9,.3,1)';
-  });
   var pending = revealEls.slice();
-  function show(el) {
-    el.style.opacity = '1';
-    el.style.transform = 'none';
-    io.unobserve(el);
+  var io = null;
+  function show(el, instant) {
+    // instant: skip the transition so the element is visible on the very next paint
+    if (instant) el.style.transition = 'none';
+    el.classList.add('is-revealed');
+    if (io) io.unobserve(el);
     var idx = pending.indexOf(el);
     if (idx !== -1) pending.splice(idx, 1);
   }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting) show(e.target);
-    });
-  }, { threshold: 0.18 });
-  revealEls.forEach(function(el){ io.observe(el); });
-  // IntersectionObserver misses elements that jump across the viewport between
-  // frames (instant anchor/scrollTo jumps) — sweep for anything scrolled past.
-  var sweepQueued = false;
-  function sweep() {
-    sweepQueued = false;
-    for (var k = pending.length - 1; k >= 0; k--) {
-      var rect = pending[k].getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.82 || rect.bottom < 0) show(pending[k]);
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function(el){ show(el, true); });
+  } else {
+    // Reveal anything already in the viewport right now — this runs before first
+    // paint, so above-the-fold content (the hero) never flashes hidden.
+    function revealInViewport() {
+      pending.slice().forEach(function(el){
+        var rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) show(el, true);
+      });
     }
+    revealInViewport();
+    // Sweep once more right before the first frame is painted: in background or
+    // prerendered tabs the viewport can be 0-height when this script runs (so the
+    // sweep above finds nothing), and rAF is deferred until the tab is shown.
+    requestAnimationFrame(revealInViewport);
+    io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) show(e.target);
+      });
+    }, { threshold: 0.18 });
+    pending.forEach(function(el){ io.observe(el); });
+    // IntersectionObserver misses elements that jump across the viewport between
+    // frames (instant anchor/scrollTo jumps) — sweep for anything scrolled past.
+    var sweepQueued = false;
+    function sweep() {
+      sweepQueued = false;
+      for (var k = pending.length - 1; k >= 0; k--) {
+        var rect = pending[k].getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.82 || rect.bottom < 0) show(pending[k]);
+      }
+    }
+    window.addEventListener('scroll', function(){
+      if (!sweepQueued) { sweepQueued = true; requestAnimationFrame(sweep); }
+    }, { passive: true });
   }
-  window.addEventListener('scroll', function(){
-    if (!sweepQueued) { sweepQueued = true; requestAnimationFrame(sweep); }
-  }, { passive: true });
 
   /* ---------- checkout modal ---------- */
   var PACKAGES = {

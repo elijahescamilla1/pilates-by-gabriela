@@ -27,7 +27,7 @@ Check off `- [ ]` boxes as you complete them.
 
 ## Tier 1 — must fix
 
-- [ ] **1. Blank hero on load.** Hero content uses `data-reveal` + opacity:0
+- [x] **1. Blank hero on load.** Hero content uses `data-reveal` + opacity:0
   and only appears after the observer fires, so a hard refresh flashes blank.
   Make content visible by default: add a `js` class to `<html>` from JS first
   thing, and only apply the hidden "from" state under `html.js [data-reveal]`.

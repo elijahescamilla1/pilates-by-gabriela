@@ -348,39 +348,39 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
 <section id="sessions" class="sessions">
   <div class="sessions-inner">
     <div class="sessions-head" data-reveal="up">
-      <div class="eyebrow" style="color:#6E2418;margin-bottom:0">Individual Sessions &amp; Packages</div>
+      <div class="eyebrow" style="color:#6E2418;margin-bottom:0">Session Packages</div>
     </div>
     <div class="sessions-grid">
       <div class="card" data-reveal="card1">
         <div class="card-top">
           <div class="card-tag">Start here</div>
           <div class="card-name">New Client Intro</div>
-          <div class="card-price">$90</div>
+          <div class="card-price">$180<span>/3 sessions</span></div>
         </div>
         <div class="card-body">
-          <p>For new clients only — a first session to assess your body and set your goals, so your ongoing privates hit the ground running. <b>Same $90 as a standard private, just your starting point.</b></p>
+          <p>New clients only — three personalized sessions to assess your movement, establish a strong foundation, and set a plan tailored to your goals. <b>Starting with a partner? Duet intro — $260.</b></p>
           <button class="cta cta--grad card-cta" data-package="intro"><span class="dot"></span>Shop now</button>
         </div>
       </div>
       <div class="card" data-reveal="card2">
         <div class="card-top">
           <div class="card-tag">Most popular</div>
-          <div class="card-name">Private Sessions</div>
-          <div class="card-price">$90<span>/session</span></div>
+          <div class="card-name">Private Packages</div>
+          <div class="card-price">$375<span>/5 sessions</span></div>
         </div>
         <div class="card-body">
-          <p>55 mins each<br>5 sessions — <b>$375</b><br>10 sessions — <b>$650</b></p>
+          <p>55 mins each &middot; one-on-one on the reformer<br>5 sessions — <b>$375</b><br>10 sessions — <b>$650</b></p>
           <button class="cta cta--grad card-cta" data-package="private"><span class="dot"></span>Shop now</button>
         </div>
       </div>
       <div class="card" data-reveal="card3">
         <div class="card-top">
           <div class="card-tag">With a partner</div>
-          <div class="card-name">Duet Sessions</div>
-          <div class="card-price">$120<span>/session</span></div>
+          <div class="card-name">Duet Packages</div>
+          <div class="card-price">$550<span>/5 sessions</span></div>
         </div>
         <div class="card-body">
-          <p>55 mins &middot; share the reformer with a friend — packaged duets at a better rate.</p>
+          <p>55 mins &middot; share the reformer with a friend<br>5 sessions — <b>$550</b><br>10 sessions — <b>$1,000</b></p>
           <button class="cta cta--grad card-cta" data-package="duet"><span class="dot"></span>Shop now</button>
         </div>
       </div>
@@ -813,12 +813,12 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
   /* ---------- checkout modal ---------- */
   // Fallback destination when a package has no specific Square product URL.
   var SQUARE_ROOT = 'https://pilates-by-gabriela.square.site';
-  // To deep-link a package straight to its Square product, set its `url`.
-  // Leave null to fall back to SQUARE_ROOT.
+  // Each package deep-links to its Square shop category (both sizes live
+  // there); null would fall back to SQUARE_ROOT.
   var PACKAGES = {
-    intro:   { eyebrow: 'Start here',     title: 'New Client Intro', price: '90',  desc: '55 minutes · your first one-on-one — a movement assessment and goal-setting to build from.', url: null },
-    private: { eyebrow: 'Most popular',   title: 'Private Sessions', price: '90',  desc: '55 minutes · one-on-one on the reformer.',        url: null },
-    duet:    { eyebrow: 'With a partner', title: 'Duet Sessions',    price: '120', desc: '55 minutes · share the reformer with a friend.',  url: null }
+    intro:   { eyebrow: 'Start here',     title: 'New Client Intro', price: '180', desc: '3 sessions · new clients only — assess your movement, establish a strong foundation, and set a plan tailored to your goals. Duet intro for two — $260.', url: 'https://pilates-by-gabriela.square.site/shop/new-client-intro/WWMXQFDPRKH4BTPQJNLHYHWR' },
+    private: { eyebrow: 'Most popular',   title: 'Private Packages', price: '375', desc: '5 sessions · 55 minutes each, one-on-one on the reformer. 10-session package — $650.', url: 'https://pilates-by-gabriela.square.site/shop/private-pilates-packages/XUFYHWSAW2M4XTSY6SSJP7B6' },
+    duet:    { eyebrow: 'With a partner', title: 'Duet Packages',    price: '550', desc: '5 sessions · 55 minutes each, share the reformer with a friend. 10-session package — $1,000.', url: 'https://pilates-by-gabriela.square.site/shop/duet-pilates-packages/XC4AO54GUXX3O43IKRLXAPJ5' }
   };
   var overlay = document.getElementById('modalOverlay');
   var card = document.getElementById('modalCard');

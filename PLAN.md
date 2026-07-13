@@ -52,7 +52,7 @@ Check off `- [ ]` boxes as you complete them.
   copy until body text hits 4.5:1 and large text 3:1. List each color changed
   with old/new hex and the ratio.
 
-- [ ] **5. Deep-link Shop now buttons.** Map each `data-package` value
+- [x] **5. Deep-link Shop now buttons.** (Category URLs discovered via Square sitemap.xml.) Map each `data-package` value
   (intro/private/duet) to its specific Square product URL via a small JS
   lookup; fall back to the Square root if missing. (Needs the 3 URLs.)
 

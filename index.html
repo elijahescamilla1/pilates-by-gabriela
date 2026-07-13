@@ -546,12 +546,12 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
   var TIKTOK = 'https://www.tiktok.com/@gswizzle99';
 
   var SLIDES = [
-    { src: 'media/clip_1.mp4', kind: 'video' },
+    { src: 'media/clip_1.mp4', kind: 'video', sound: true },
     { src: 'media/clip_3.mp4', kind: 'video' },
     { src: 'media/img_6603.jpg', kind: 'img' },
-    { src: 'media/clip_4.mp4', kind: 'video' },
+    { src: 'media/clip_4.mp4', kind: 'video', sound: true },
     { src: 'media/img_6602.jpg', kind: 'img' },
-    { src: 'media/clip_5.mp4', kind: 'video' },
+    { src: 'media/clip_5.mp4', kind: 'video', sound: true },
     { src: 'media/img_6601.jpg', kind: 'img' },
     { src: 'media/tiktok_pinned.mp4', kind: 'video' },
     { src: 'media/img_7579.jpg', kind: 'img' },
@@ -602,7 +602,7 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
     el.appendChild(media);
 
     var badge = null;
-    if (s.kind === 'video') {
+    if (s.kind === 'video' && s.sound) {
       badge = document.createElement('div');
       badge.className = 'mute-badge';
       badge.innerHTML = SPEAKER_SVG;
@@ -637,8 +637,10 @@ html.js [data-reveal].is-revealed{opacity:1;transform:none}
 
     el.addEventListener('click', function(){
       if (i === state.active) {
-        state.unmuted = state.unmuted === i ? null : i;
-        update();
+        if (s.sound) {
+          state.unmuted = state.unmuted === i ? null : i;
+          update();
+        }
       } else {
         go(i);
       }
